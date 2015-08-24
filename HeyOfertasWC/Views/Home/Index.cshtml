@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Edeals";
+}
+
+
+<article class="">
+    <section>
+        <!-- <h3 id="countResult" data-search="ViewBag.Id">
+            Resultado de la busqueda
+        </h3> -->
+    </section>
+    <div>
+        <div id="searchResult" class="container content float-left">
+            <div> <img src="~/Content/images/loading2.gif" style="position:relative; left:40%;"  > </div>
+        </div>
+    </div>
+</article>
+
+@section scripts{
+
+    @Html.Partial("_Results")
+    <script type="text/javascript">
+
+        var Deals = function (element, source, template) {
+            var self = this;
+            self.source = source;
+            self.template = template;
+            self.element = element;
+            self.currentPage = 0;
+            self.id = $("#countResult").data("search");
+            self.json;
+
+            self.Search = function (value, current) {
+
+                console.log(value);
+                console.log(current);
+        
+                
+                self.currentPage = current;
+
+                var search = {
+                    limit: 32,
+                    offset: self.currentPage
+                };
+
+                if (value != undefined && value != "") {
+                    search.description = value;
+
+                } else if (self.id != undefined) {
+                    search.id = self.id;
+                }
+
+                $.getJSON("http://edeals.do:4000/api/deals", search, function (response) {
+                    self.json=response;
+                     var result = self.template(self.json);
+
+                    if (current <= 0) {
+
+                        element.html(result);
+                        setLoadMore(self,value);
+                    } else {
+
+                        element.find("#loadMore").before(result);
+                        element.find("#loadMore").remove();
+                        
+                    }
+                    
+                });
+            }
+        };
+
+
+        var source1 = $("#entry-template").html();
+        var source2 = $("#entry-template2").html();
+        var source = source1;
+
+        var template1 = Handlebars.compile(source1);
+        var template2 = Handlebars.compile(source2);
+        var template = template1;
+
+        var current = 0;
+        
+
+        function setLoadMore(d,s) {
+            //alert("entre s see");
+            //var deal = new Deals($("#searchResult"), source, template);
+            var deal = d;
+            $(window).scroll(function () {
+                var wintop = $(window).scrollTop(),
+                    docheight = $(document).height(),
+                    winheight = $(window).height();
+
+                var scrolltrigger = 1;
+                if ((wintop / (docheight - winheight)) == scrolltrigger) {
+                    //     alert('scroll bottom');
+
+                    current += 16;
+                    deal.Search($("#search").val(), current);
+                }
+            });
+
+            $("#loadMore").click(function (e) {
+                current += 32;
+                deal.Search($("#search").val(), current);
+                e.preventDefault();
+             });
+
+        }
+
+
+        // Busqueda
+        $(function () {
+
+            var deal = new Deals($("#searchResult"), source, template);
+            deal.Search("", 0);
+
+            $("#btnSearch").click(function () {
+                current = 0;
+                deal.Search($("#search").val(), current);
+            });
+
+            $("#search").keypress(function (e) {
+                if (e.which == 13) {
+                    current = 0;
+                    deal.Search($(this).val(), current);
+                }
+            });
+
+            $("#gridView").click(function (e) {
+                deal.source = source1;
+                deal.template = template1;
+               // current = 0;
+                deal.element.html(template1(deal.json));
+
+                e.preventDefault();
+            });
+
+            $("#listView").click(function (e) {
+                deal.source = source2;
+                deal.template = template2;
+            //    current = 0;
+                deal.element.html(template2(deal.json));
+                e.preventDefault();
+            });
+
+    
+
+        });
+ 
+ 
+    </script>
+
+}

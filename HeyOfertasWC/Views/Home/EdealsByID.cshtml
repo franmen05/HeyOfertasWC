@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Edeals";
+}
+
+<article class="">
+    <section>
+        <!-- <h3 id="countResult" data-search="ViewBag.Id">
+            Resultado de la busqueda
+        </h3> -->
+    </section>
+    <div>
+        <div id="searchResult" class="container content float-left">
+
+            <div class=" col-md-3 maxh">
+                <div class=" product-thumb">
+                    <a href="@ViewBag.fullurl" target="_blank">
+                        <div class="card-image" style='background-image:url( @ViewBag.deal.picture);background-color: #ffffff;background-size: cover;'>
+                            <div class="pull-center">
+                                <i class="fa fa-map-marker"></i> @ViewBag.deal.source.name
+
+                            </div>
+                        </div>
+                    </a>
+                    <div class="product-inner">
+                        <div class="">
+                            <a href="@ViewBag.fullurl" target="_blank">
+                                <p class="product-desciption">@ViewBag.des</p>
+                            </a>
+                        </div>
+
+                        <div class="product-meta">
+
+                            <ul class="product-price-list">
+                                <li><span class="product-old-price">RD$ @ViewBag.deal.originalPrice </span></li>
+                                <li><span class="product-save"> <script>document.write((100 - (parseFloat(@ViewBag.deal.discountedPrice ) / parseFloat(@ViewBag.deal.originalPrice) * 100)).toFixed(0));</script> %</span></li>
+                                <li><span class="product-price">RD$ @ViewBag.deal.discountedPrice</span></li>
+                            </ul>
+                        </div>
+
+                        <p class="product-location">
+
+                            <button class="btn btn-primary" type="button" onclick="javascript: window.prompt(' Copy to clipboard: Ctrl+C, Enter', ' www.edeals.do/Home/EdealsByID?_id=@ViewBag.deal._id');">Compartir Link </button>
+                            <a class="btn btn-social-icon btn-facebook" onclick="sharedLink('f', 'www.edeals.do/Home/EdealsByID?_id=@ViewBag.deal._id', 'Edeals')">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="btn btn-social-icon btn-google" onclick="sharedLink('g', 'www.edeals.do/Home/EdealsByID?_id=@ViewBag.deal._id', 'Edeals')">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div>  <a href="~/"  class='btn btn-info' style='width:100%'>Ver Todas  </a></div>
+
+        </div>
+    </div>
+</article>
+
+@section scripts{
+
+    @Html.Partial("_Results")
+    <script type="text/javascript">
+
+
+        var Deals = function (element, source, template) {
+            var self = this;
+            self.source = source;
+            self.template = template;
+            self.element = element;
+            self.currentPage = 0;
+            self.id = $("#countResult").data("search");
+            self.json;
+
+            self.Search = function (value, current) {
+
+                console.log(value);
+                console.log(current);
+
+                self.currentPage = current;
+
+                var search = {
+                    limit: 32,
+                    offset: self.currentPage
+                };
+
+                if (value != undefined && value != "") {
+                    search.description = value;
+                } else if (self.id != undefined) {
+                    search.id = self.id;
+                }
+
+                $.getJSON("http://edeals.do:4000/api/deals", search, function (response) {
+                    self.json=response;
+                     var result = self.template(self.json);
+
+                    if (current <= 0) {
+
+                        element.html(result);
+                        setLoadMore();
+                    } else {
+
+                        element.find("#loadMore").before(result);
+                        element.find("#loadMore").remove();
+                    }
+                });
+            }
+        };
+
+
+        var source1 = $("#entry-template").html();
+        var source2 = $("#entry-template2").html();
+        var source = source1;
+
+        var template1 = Handlebars.compile(source1);
+        var template2 = Handlebars.compile(source2);
+        var template = template1;
+
+        var current = 0;
+
+        function setLoadMore() {
+
+            var deal = new Deals($("#searchResult"), source, template);
+            $("#loadMore").click(function (e) {
+                current += 32;
+                deal.Search("", current);
+                e.preventDefault();
+            });
+        }
+
+        // Busqueda
+        $(function () {
+            
+            var deal = new Deals($("#searchResult"), source, template);
+            var url = document.URL.split('=');
+            var hasID = url[1] != undefined;
+                      
+            $("#btnSearch").click(function () {
+                current = 0;
+                deal.Search($("#search").val(), current);
+            });
+
+            $("#search").keypress(function (e) {
+                if (e.which == 13) {
+                    current = 0;
+                    deal.Search($(this).val(), current);
+                }
+            });
+
+            $("#gridView").click(function (e) {
+                deal.source = source1;
+                deal.template = template1;
+                current = 0;
+                deal.element.html(template1(deal.json));
+
+                e.preventDefault();
+            });
+
+            $("#listView").click(function (e) {
+                deal.source = source2;
+                deal.template = template2;
+                current = 0;
+                deal.element.html(template2(deal.json));
+                e.preventDefault();
+            });
+
+        });
+    </script>
+
+}

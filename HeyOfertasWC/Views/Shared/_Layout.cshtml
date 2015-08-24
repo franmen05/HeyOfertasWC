@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Buscador de Cupones en Republica Dominicana</title>
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
+    <link href="~/logo.png" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/main.css")
+    @Styles.Render("~/Content/owl.transitions.css")
+    @Styles.Render("~/Content/animate.css")
+    @Styles.Render("~/Content/rateit.css")
+    @Styles.Render("~/Content/font-awesome.css")
+    @Styles.Render("~/Content/dark-green.css")
+    @Styles.Render("~/Content/bootstrap-social.css")
+
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+
+<body>
+    <!-- ============================================== HEADER ============================================== -->
+    <header class="header-style-1 header-style-3">
+        <div class="main-header">
+            <div class="container" >
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
+                        <!-- ============================================================= LOGO ============================================================= -->
+                        <div class="logo">
+                            <a href="~/">
+                                <img src="~/Content/site_images/logo-mini.png" alt="">
+                            </a>
+                        </div><!-- /.logo -->
+                        <!-- ============================================================= LOGO : END ============================================================= -->
+                    </div><!-- /.logo-holder -->
+                </div><!-- /.top-search-holder -->
+                <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row"> </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.main-header -->
+        <!-- ============================================== NAVBAR ============================================== -->
+        <div class="header-nav animate-dropdown">
+            <div class="container">
+                <div class="yamm navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <form class="navbar-form navbar-left" role="search" onsubmit="return false">
+                            <div class="form-group">
+                                <input type="search"
+                                       id="search"
+                                       placeholder="Buscar Ofertas (ej. Carro, Masajes, Restaurants)"
+                                       role="search" />
+                                <a class="btn btn-small btn-primary" title="Buscar" id="btnSearch">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="nav-bg-class">
+                        <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
+                            <div class="nav-outer">
+                                <ul class="nav navbar-nav ">
+                                    <li class="active">
+                                        <a data-toggle="tab" id="gridView" style="cursor:pointer"><i class=" icon fa fa-th"></i> Grid</a>
+                                    </li>    
+                                    <li >
+                                        <a data-toggle="tab" id="listView" style="cursor:pointer"><i class="icon fa fa-th-list"></i> List</a>
+                                    </li>
+                                    
+                                    @*
+                                    <li class="active dropdown yamm-fw">
+                                        <a href="~/">Home <i class="icon fa fa-home fa-fw"></i></a>
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a href="~/Home/Contact">Login</a>
+                                    </li>
+                                        *@
+
+                                </ul><!-- /.navbar-nav -->
+                                <div class="clearfix"></div>
+                            </div><!-- /.nav-outer -->
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.nav-bg-class -->
+                </div><!-- /.navbar-default -->
+            </div><!-- /.container-class -->
+        </div><!-- /.header-nav -->
+    </header>
+
+    <!-- ============================================== HEADER : END ============================================== -->
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+
+    <!-- ============================================================= FOOTER ============================================================= -->
+    <footer id="footer" class="footer color-bg">
+        @*
+    <div class="links-social inner-top-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <!-- ============================================================= CONTACT INFO ============================================================= -->
+                <div class="contact-info">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <a href="~/Views/Home/Index">
+
+                                <img src="assets/radikal/logo3-2.jpg" alt="">
+
+                            </a>
+                        </div><!-- /.logo -->
+
+                    </div><!-- /.footer-logo -->
+
+                    <div class="module-body m-t-20">
+                        <p class="about-us"> Nam libero tempore, cum soluta nobis est ses  eligendi optio cumque cum soluta nobis est ses  eligendi optio cumque.</p>
+
+                        <div class="social-icons">
+
+                            <a href="http://facebook.com/transvelo" class='active'><i class="icon fa fa-facebook"></i></a>
+                            <a href="#"><i class="icon fa fa-twitter"></i></a>
+                            <a href="#"><i class="icon fa fa-linkedin"></i></a>
+                            <a href="#"><i class="icon fa fa-rss"></i></a>
+                            <a href="#"><i class="icon fa fa-pinterest"></i></a>
+
+                        </div><!-- /.social-icons -->
+                    </div><!-- /.module-body -->
+
+                </div><!-- /.contact-info -->
+                <!-- ============================================================= CONTACT INFO : END ============================================================= -->
+            </div><!-- /.col -->
+
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <!-- ============================================================= INFORMATION============================================================= -->
+                <div class="contact-information">
+                    <div class="module-heading">
+                        <h4 class="module-title">information</h4>
+                    </div><!-- /.module-heading -->
+
+                    <div class="module-body outer-top-xs">
+                        <ul class="toggle-footer" style="">
+                            <li class="media">
+                                <div class="pull-left">
+                                    <span class="icon fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <p>868 Any Stress,Burala Casi,Picasa USA.</p>
+                                </div>
+                            </li>
+
+                            <li class="media">
+                                <div class="pull-left">
+                                    <span class="icon fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <p>(400) 0888 888 888<br>(400) 888 888 888</p>
+                                </div>
+                            </li>
+
+                            <li class="media">
+                                <div class="pull-left">
+                                    <span class="icon fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <span><a href="#">Contact@Unicase.com</a></span><br>
+                                    <span><a href="#">Sale@Unicase.com</a></span>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div><!-- /.module-body -->
+                </div><!-- /.contact-timing -->
+                <!-- ============================================================= INFORMATION : END ============================================================= -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.links-social -->
+        *@
+        <div class="copyright-bar">
+            <div class="container">
+                <div class=" no-padding">
+                    <div class="copyright">
+                        Copyright © 2015
+                        <a href="~/">Edeals.do</a>
+                        - All rights Reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- ============================================================= FOOTER : END============================================================= -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/handlebars.min.js"></script>
+    <script type="text/javascript">
+    Handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
+        lvalue = parseFloat(lvalue);
+        rvalue = parseFloat(rvalue);
+
+        return {
+            "+": lvalue + rvalue,
+            "-": lvalue - rvalue,
+            "*": lvalue * rvalue,
+            "/": lvalue / rvalue,
+            "%": (100 - (lvalue / rvalue * 100)).toFixed(0)
+        }[operator];
+    });
+
+    function sharedLink(who, url, name) {
+        whoUrl = '';
+        if (who == 'f') {
+            whoUrl = "https://www.facebook.com/sharer/sharer.php?t=" + name + "&u=" + url;
+        }
+        else if (who == "t") {
+            whoUrl = "https://twitter.com/intent/tweet?original_referer=http://puntiel.com&text=" + name + "&url=" + url + "&via=edeals";
+        }
+        else if (who = "g") {
+            whoUrl = "https://plus.google.com/share?url=" + url;
+        }
+
+        window.open(whoUrl, void 0, "width=515,height=450,top=50,left=50");
+    }
+    </script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

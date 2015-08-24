@@ -1,0 +1,116 @@
+﻿<script id="entry-template" type="text/x-handlebars-template">
+
+    {{#each this}}
+
+    <div class=" col-md-3 maxh">
+        <div class=" product-thumb">
+            <a href="{{source.url}}{{url}}" target="_blank">
+                <div class="card-image" style='background-image:url({{picture}});background-color: #ffffff;background-size: cover;'>
+                    <div class="pull-center">
+                        <i class="fa fa-map-marker"></i> {{source.name}}
+
+                    </div>
+                </div>
+            </a>
+            <div class="product-inner">
+                <div class="">
+                    <a href="{{source.url}}{{url}}" target="_blank">
+                        <p class="product-desciption">{{description}} </p>
+                    </a>
+                </div>
+
+                <div class="product-meta">
+
+                    <ul class="product-price-list">
+                        <li><span class="product-old-price">RD${{originalPrice}} </span></li>
+                        <li><span class="product-save"> {{math discountedPrice "%" originalPrice}}%</span></li>
+                        <li><span class="product-price">RD${{discountedPrice}}</span></li>
+                    </ul>
+                </div>
+                <p class="product-location">
+
+                    <button class="btn btn-primary" type="button" onclick="javascript:window.prompt(' Copy to clipboard: Ctrl+C, Enter','{{source.url}}{{url}}'  );">Compartir Link </button>
+                    <a class="btn btn-social-icon btn-facebook" onclick="sharedLink('f','{{source.url}}{{url}}','Edeals.do')">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-social-icon btn-google" onclick="sharedLink('g','{{source.url}}{{url}}','Edeals.do')">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="separator"><br /></div>
+
+    {{/each}}
+    <div> <br /> <a href=# id=loadMore class='btn btn-info' style='width:100%'>Ver mas</a></div>
+</script>
+
+<script id="entry-template2" type="text/x-handlebars-template">
+    {{#each this}}
+
+    <div class="row rowPersonalizer">
+        <div class="col col-sm-4 col-lg-4">
+            <a href="{{source.url}}{{url}}" target="_blank">
+                <div class="card-image" style='background-image:url({{picture}});background-color: #ffffff;background-size: cover;'>
+                    <div class="pull-center">
+                        <i class="fa fa-map-marker"></i> {{source.name}}
+                    </div>
+                </div>
+            </a>
+        </div><!-- /.col -->
+
+        <div class="col col-sm-8 col-lg-8">
+            <div class="product-info">
+                <div class="rating rateit-small"></div>
+                <div class="product-inner">
+                    <div class="">
+                        <a href="{{source.url}}{{url}}" target="_blank">
+                            <p class="product-desciptionRow">{{description}}</p>
+                        </a>
+                    </div>
+                    <div class="product-meta">
+                        <br />
+                        <ul class="product-price-list">
+                            <li><span class="product-old-price">RD${{originalPrice}} </span></li>
+                            <li><span class="product-save"> {{math discountedPrice "%" originalPrice}}%</span></li>
+                            <li><span class="product-price">RD${{discountedPrice}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cart clearfix animate-effect">
+                    <div class="action" onclick="javascript:window.prompt(' Copy to clipboard: Ctrl+C, Enter','{{source.url}}{{url}}'  );">
+                        <ul class="list-unstyled">
+                            <li class="add-cart-button btn-group">
+                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+                                    <i class="fa fa-share-alt"></i>
+                                </button>
+                                <button class="btn btn-primary" type="button">Compartir Link </button>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.action -->
+
+                    <div>
+                        @*<a class="btn btn-social-icon btn-twitter" onclick="sharedLink('t','{{source.url}}{{url}}','Edeals.do')">
+                                <i class="fa fa-twitter"></i>
+                            </a>*@
+                        <a class="btn btn-social-icon btn-facebook" onclick="sharedLink('f','{{source.url}}{{url}}','Edeals.do')">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="btn btn-social-icon btn-google" onclick="sharedLink('g','{{source.url}}{{url}}','Edeals.do')">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                </div><!-- /.cart -->
+
+            </div><!-- /.product-info -->
+        </div><!-- /.col -->
+    </div><!-- /.product-list-row -->
+
+    <div id=""><br /></div>
+    {{/each}}
+
+    <a href=# id=loadMore class='btn btn-info' style='width:100%'>Ver mas</a>
+</script>
